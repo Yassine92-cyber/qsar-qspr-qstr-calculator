@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
+import QSAR from './pages/QSAR'
 import QSPR from './pages/QSPR'
 import QSTR from './pages/QSTR'
 import Descriptors from './pages/Descriptors'
@@ -15,6 +16,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/qsar" element={<QSAR />} />
           <Route path="/qspr" element={<QSPR />} />
           <Route path="/qstr" element={<QSTR />} />
           <Route path="/descriptors" element={<Descriptors />} />

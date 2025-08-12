@@ -1,86 +1,40 @@
 import React, { useState } from 'react'
-import { AlertTriangle, Database, Brain, BarChart3, CheckCircle, Shield, Eye, TrendingUp, Zap, FlaskConical, Skull, Heart, Brain as BrainIcon, Shield as ShieldIcon, Activity, AlertOctagon } from 'lucide-react'
+import { Activity, Database, Brain, BarChart3, Eye, Zap, FlaskConical, Target, TestTube, Beaker, Atom, TrendingUp } from 'lucide-react'
 
-const QSTR: React.FC = () => {
+const QSAR: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview')
   const [smiles, setSmiles] = useState('')
-  const [selectedToxicity, setSelectedToxicity] = useState('acute')
+  const [selectedActivity, setSelectedActivity] = useState('binding_affinity')
 
   const tabs = [
-    {
-      id: 'overview',
-      name: 'Overview',
-      icon: AlertTriangle,
-      description: 'QSTR modeling overview and configuration',
-    },
-    {
-      id: 'training',
-      name: 'Model Training',
-      icon: Brain,
-      description: 'Train QSTR models with your data',
-    },
-    {
-      id: 'descriptors',
-      name: 'Enhanced Descriptors',
-      icon: Database,
-      description: 'Calculate 2D and 3D molecular descriptors',
-    },
-    {
-      id: 'toxicity_alerts',
-      name: 'Toxicity Alerts',
-      icon: AlertOctagon,
-      description: 'Screen for problematic substructures',
-    },
-    {
-      id: 'analysis',
-      name: 'Analysis & Plots',
-      icon: BarChart3,
-      description: 'Model analysis and visualization',
-    },
-    {
-      id: 'visualization',
-      name: 'Molecular Visualization',
-      icon: Eye,
-      description: 'Visualize molecular structures and toxicity',
-    },
-    {
-      id: 'uncertainty',
-      name: 'Uncertainty Quantification',
-      icon: TrendingUp,
-      description: 'Quantify prediction uncertainty and confidence',
-    },
-    {
-      id: 'advanced',
-      name: 'Advanced Modeling',
-      icon: Zap,
-      description: 'Advanced QSTR modeling options',
-    },
+    { id: 'overview', name: 'Overview', icon: Activity, description: 'QSAR modeling overview' },
+    { id: 'training', name: 'Model Training', icon: Brain, description: 'Train QSAR models' },
+    { id: 'descriptors', name: 'Molecular Descriptors', icon: Database, description: 'Calculate descriptors' },
+    { id: 'structure_activity', name: 'Structure-Activity', icon: TestTube, description: 'SAR analysis' },
+    { id: 'pharmacophore', name: 'Pharmacophore', icon: Target, description: 'Pharmacophore modeling' },
+    { id: 'analysis', name: 'Analysis & Plots', icon: BarChart3, description: 'Model analysis' },
+    { id: 'visualization', name: 'Molecular Visualization', icon: Eye, description: 'Visualize structures' },
+    { id: 'advanced', name: 'Advanced Modeling', icon: Zap, description: 'Advanced options' },
   ]
 
-  const toxicityTypes = [
-    { id: 'acute', name: 'Acute Toxicity', icon: Skull, description: 'Immediate toxic effects' },
-    { id: 'chronic', name: 'Chronic Toxicity', icon: Activity, description: 'Long-term toxic effects' },
-    { id: 'carcinogenicity', name: 'Carcinogenicity', icon: AlertOctagon, description: 'Cancer-causing potential' },
-    { id: 'mutagenicity', name: 'Mutagenicity', icon: BrainIcon, description: 'DNA damage potential' },
-    { id: 'reproductive', name: 'Reproductive Toxicity', icon: Heart, description: 'Fertility and development effects' },
-    { id: 'neurotoxicity', name: 'Neurotoxicity', icon: BrainIcon, description: 'Nervous system effects' },
-    { id: 'immunotoxicity', name: 'Immunotoxicity', icon: ShieldIcon, description: 'Immune system effects' },
-    { id: 'endocrine', name: 'Endocrine Disruption', icon: Activity, description: 'Hormone system interference' },
-    { id: 'skin_sensitization', name: 'Skin Sensitization', icon: Shield, description: 'Allergic skin reactions' },
-    { id: 'eye_irritation', name: 'Eye Irritation', icon: Eye, description: 'Ocular irritation potential' },
+  const activityTypes = [
+    { id: 'binding_affinity', name: 'Binding Affinity', icon: Target, description: 'Receptor-ligand binding' },
+    { id: 'enzyme_inhibition', name: 'Enzyme Inhibition', icon: Beaker, description: 'Enzyme inhibitory activity' },
+    { id: 'cell_viability', name: 'Cell Viability', icon: TestTube, description: 'Cell survival' },
+    { id: 'antimicrobial', name: 'Antimicrobial Activity', icon: Atom, description: 'Bacterial inhibition' },
+    { id: 'bioavailability', name: 'Bioavailability', icon: TrendingUp, description: 'Drug absorption' },
   ]
 
   const renderOverview = () => (
     <div className="space-y-6">
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+      <div className="bg-green-50 border border-green-200 rounded-lg p-6">
         <div className="flex items-start space-x-3">
-          <AlertTriangle className="w-6 h-6 text-red-600 mt-0.5" />
+          <Activity className="w-6 h-6 text-green-600 mt-0.5" />
           <div>
-            <h3 className="font-medium text-red-900 mb-2">QSTR Modeling Overview</h3>
-            <p className="text-sm text-red-800">
-              Quantitative Structure-Toxicity Relationships (QSTR) modeling predicts molecular toxicity 
-              based on structural characteristics. This platform provides comprehensive tools for building, 
-              training, and evaluating QSTR models with advanced toxicity screening capabilities.
+            <h3 className="font-medium text-green-900 mb-2">QSAR Modeling Overview</h3>
+            <p className="text-sm text-green-800">
+              Quantitative Structure-Activity Relationships (QSAR) modeling predicts biological activities 
+              based on molecular structural characteristics for drug discovery and chemical biology.
             </p>
           </div>
         </div>
@@ -88,23 +42,23 @@ const QSTR: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Toxicity Type Selection</h4>
+          <h4 className="font-semibold text-gray-900 mb-4">Activity Type Selection</h4>
           <div className="space-y-3">
-            {toxicityTypes.map((toxicity) => (
+            {activityTypes.map((activity) => (
               <div
-                key={toxicity.id}
+                key={activity.id}
                 className={`p-3 rounded-lg border cursor-pointer transition-colors ${
-                  selectedToxicity === toxicity.id
-                    ? 'border-red-500 bg-red-50'
+                  selectedActivity === activity.id
+                    ? 'border-green-500 bg-green-50'
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
-                onClick={() => setSelectedToxicity(toxicity.id)}
+                onClick={() => setSelectedActivity(activity.id)}
               >
                 <div className="flex items-center space-x-3">
-                  <toxicity.icon className="w-5 h-5 text-gray-600" />
+                  <activity.icon className="w-5 h-5 text-gray-600" />
                   <div>
-                    <div className="font-medium text-gray-900">{toxicity.name}</div>
-                    <div className="text-sm text-gray-600">{toxicity.description}</div>
+                    <div className="font-medium text-gray-900">{activity.name}</div>
+                    <div className="text-sm text-gray-600">{activity.description}</div>
                   </div>
                 </div>
               </div>
@@ -123,22 +77,22 @@ const QSTR: React.FC = () => {
                 value={smiles}
                 onChange={(e) => setSmiles(e.target.value)}
                 placeholder="Enter SMILES string (e.g., CCO for ethanol)"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 rows={3}
               />
             </div>
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Target Toxicity
+                Target Activity
               </label>
               <div className="text-sm text-gray-600">
-                {toxicityTypes.find(t => t.id === selectedToxicity)?.name}
+                {activityTypes.find(a => a.id === selectedActivity)?.name}
               </div>
             </div>
 
-            <button className="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors">
-              Screen for Toxicity
+            <button className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">
+              Calculate Descriptors
             </button>
           </div>
         </div>
@@ -148,13 +102,13 @@ const QSTR: React.FC = () => {
 
   const renderTraining = () => (
     <div className="space-y-6">
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
         <div className="flex items-start space-x-3">
-          <Brain className="w-6 h-6 text-green-600 mt-0.5" />
+          <Brain className="w-6 h-6 text-blue-600 mt-0.5" />
           <div>
-            <h3 className="font-medium text-green-900 mb-2">QSTR Model Training</h3>
-            <p className="text-sm text-green-800">
-              Train QSTR models using various machine learning algorithms and toxicity-specific techniques.
+            <h3 className="font-medium text-blue-900 mb-2">QSAR Model Training</h3>
+            <p className="text-sm text-blue-800">
+              Train QSAR models using various machine learning algorithms and activity-specific techniques.
             </p>
           </div>
         </div>
@@ -168,25 +122,12 @@ const QSTR: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Algorithm
               </label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                 <option>Random Forest</option>
                 <option>Gradient Boosting</option>
                 <option>Support Vector Machine</option>
                 <option>Neural Network</option>
-                <option>Logistic Regression</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Toxicity Type
-              </label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
-                <option>Acute Toxicity</option>
-                <option>Chronic Toxicity</option>
-                <option>Carcinogenicity</option>
-                <option>Mutagenicity</option>
-                <option>Reproductive Toxicity</option>
+                <option>Partial Least Squares</option>
               </select>
             </div>
 
@@ -194,14 +135,14 @@ const QSTR: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Cross-Validation Folds
               </label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                 <option>5</option>
                 <option>10</option>
                 <option>Leave-One-Out</option>
               </select>
             </div>
 
-            <button className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">
+            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
               Start Training
             </button>
           </div>
@@ -227,9 +168,9 @@ const QSTR: React.FC = () => {
         <div className="flex items-start space-x-3">
           <Database className="w-6 h-6 text-purple-600 mt-0.5" />
           <div>
-            <h3 className="font-medium text-purple-900 mb-2">Enhanced Molecular Descriptors</h3>
+            <h3 className="font-medium text-purple-900 mb-2">Molecular Descriptors</h3>
             <p className="text-sm text-purple-800">
-              Calculate comprehensive 2D and 3D molecular descriptors optimized for toxicity prediction.
+              Calculate comprehensive 2D and 3D molecular descriptors optimized for QSAR modeling.
             </p>
           </div>
         </div>
@@ -256,15 +197,7 @@ const QSTR: React.FC = () => {
               <span className="text-gray-600">✓</span>
             </div>
             <div className="flex justify-between">
-              <span>H-Bond Acceptors</span>
-              <span className="text-gray-600">✓</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Rotatable Bonds</span>
-              <span className="text-gray-600">✓</span>
-            </div>
-            <div className="flex justify-between">
-              <span>QED</span>
+              <span>Lipinski Rule of 5</span>
               <span className="text-gray-600">✓</span>
             </div>
           </div>
@@ -282,41 +215,29 @@ const QSTR: React.FC = () => {
               <span className="text-gray-600">✓</span>
             </div>
             <div className="flex justify-between">
-              <span>GETAWAY</span>
-              <span className="text-gray-600">✓</span>
-            </div>
-            <div className="flex justify-between">
               <span>3D-MoRSE</span>
               <span className="text-gray-600">✓</span>
             </div>
             <div className="flex justify-between">
-              <span>Plane of Best Fit</span>
+              <span>Molecular Volume</span>
               <span className="text-gray-600">✓</span>
             </div>
             <div className="flex justify-between">
-              <span>Conformer Generation</span>
+              <span>Surface Area</span>
               <span className="text-gray-600">✓</span>
             </div>
           </div>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Toxicity-Specific</h4>
+          <h4 className="font-semibold text-gray-900 mb-4">QSAR-Specific</h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span>Electron Density</span>
+              <span>Electrostatic Potential</span>
               <span className="text-gray-600">✓</span>
             </div>
             <div className="flex justify-between">
-              <span>Reactive Centers</span>
-              <span className="text-gray-600">✓</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Metabolic Sites</span>
-              <span className="text-gray-600">✓</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Bioavailability</span>
+              <span>Pharmacophore Features</span>
               <span className="text-gray-600">✓</span>
             </div>
             <div className="flex justify-between">
@@ -324,7 +245,11 @@ const QSTR: React.FC = () => {
               <span className="text-gray-600">✓</span>
             </div>
             <div className="flex justify-between">
-              <span>Lipophilicity</span>
+              <span>Drug-Likeness</span>
+              <span className="text-gray-600">✓</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Bioavailability</span>
               <span className="text-gray-600">✓</span>
             </div>
           </div>
@@ -342,7 +267,7 @@ const QSTR: React.FC = () => {
               value={smiles}
               onChange={(e) => setSmiles(e.target.value)}
               placeholder="Enter SMILES string"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               rows={3}
             />
           </div>
@@ -356,94 +281,93 @@ const QSTR: React.FC = () => {
     </div>
   )
 
-  const renderToxicityAlerts = () => (
+  const renderStructureActivity = () => (
     <div className="space-y-6">
-      <div className="bg-orange-50 border border-orange-200 rounded-lg p-6">
+      <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
         <div className="flex items-start space-x-3">
-          <AlertOctagon className="w-6 h-6 text-orange-600 mt-0.5" />
+          <TestTube className="w-6 h-6 text-indigo-600 mt-0.5" />
           <div>
-            <h3 className="font-medium text-orange-900 mb-2">Toxicity Alerts</h3>
-            <p className="text-sm text-orange-800">
-              Screen molecules for problematic substructures and toxicity alerts using comprehensive databases.
+            <h3 className="font-medium text-indigo-900 mb-2">Structure-Activity Relationships</h3>
+            <p className="text-sm text-indigo-800">
+              Analyze and visualize structure-activity relationships for drug discovery and optimization.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Alert Databases</h4>
-          <div className="space-y-4">
-            <div className="p-4 border border-gray-200 rounded-lg">
-              <h5 className="font-medium text-gray-900 mb-2">PAINS (Pan-Assay Interference Compounds)</h5>
-              <p className="text-sm text-gray-600 mb-2">20+ patterns for assay interference</p>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span className="text-sm text-green-600">Active</span>
-              </div>
-            </div>
-
-            <div className="p-4 border border-gray-200 rounded-lg">
-              <h5 className="font-medium text-gray-900 mb-2">BRENK (Bayer Rule of Five)</h5>
-              <p className="text-sm text-gray-600 mb-2">15+ patterns for drug-likeness</p>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span className="text-sm text-green-600">Active</span>
-              </div>
-            </div>
-
-            <div className="p-4 border border-gray-200 rounded-lg">
-              <h5 className="font-medium text-gray-900 mb-2">NIH (National Institutes of Health)</h5>
-              <p className="text-sm text-gray-600 mb-2">10+ patterns for toxicity</p>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span className="text-sm text-green-600">Active</span>
-              </div>
-            </div>
-
-            <div className="p-4 border border-gray-200 rounded-lg">
-              <h5 className="font-medium text-gray-900 mb-2">REACH (Registration, Evaluation, Authorization)</h5>
-              <p className="text-sm text-gray-600 mb-2">5+ patterns for chemical safety</p>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span className="text-sm text-green-600">Active</span>
-              </div>
-            </div>
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h4 className="font-semibold text-gray-900 mb-4">SAR Analysis</h4>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Activity Data
+            </label>
+            <textarea
+              placeholder="Enter activity values (IC50, Ki, EC50, etc.)"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              rows={3}
+            />
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Analysis Type
+            </label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option>Activity Cliffs</option>
+              <option>Matched Molecular Pairs</option>
+              <option>Scaffold Hopping</option>
+              <option>Activity Landscape</option>
+            </select>
+          </div>
+          <button className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors">
+            Analyze SAR
+          </button>
         </div>
+      </div>
+    </div>
+  )
 
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Screening Results</h4>
-          <div className="space-y-4">
-            <div className="text-center py-8 text-gray-500">
-              <AlertOctagon className="w-12 h-12 mx-auto mb-2 text-gray-400" />
-              <p>No screening results</p>
-              <p className="text-sm">Enter a SMILES string to screen for alerts</p>
-            </div>
+  const renderPharmacophore = () => (
+    <div className="space-y-6">
+      <div className="bg-orange-50 border border-orange-200 rounded-lg p-6">
+        <div className="flex items-start space-x-3">
+          <Target className="w-6 h-6 text-orange-600 mt-0.5" />
+          <div>
+            <h3 className="font-medium text-orange-900 mb-2">Pharmacophore Modeling</h3>
+            <p className="text-sm text-orange-800">
+              Generate and analyze pharmacophore models for drug design and optimization.
+            </p>
           </div>
         </div>
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h4 className="font-semibold text-gray-900 mb-4">Molecule Screening</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h4 className="font-semibold text-gray-900 mb-4">Pharmacophore Generation</h4>
+        <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              SMILES Input
+              Active Compounds
             </label>
             <textarea
-              value={smiles}
-              onChange={(e) => setSmiles(e.target.value)}
-              placeholder="Enter SMILES string to screen"
+              placeholder="Enter SMILES of active compounds"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               rows={3}
             />
           </div>
-          <div className="flex flex-col justify-end">
-            <button className="bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition-colors">
-              Screen for Alerts
-            </button>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Method
+            </label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+              <option>LigandScout</option>
+              <option>Phase</option>
+              <option>MOE</option>
+              <option>Custom</option>
+            </select>
           </div>
+          <button className="w-full bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition-colors">
+            Generate Pharmacophore
+          </button>
         </div>
       </div>
     </div>
@@ -457,7 +381,7 @@ const QSTR: React.FC = () => {
           <div>
             <h3 className="font-medium text-yellow-900 mb-2">Analysis & Plots</h3>
             <p className="text-sm text-yellow-800">
-              Analyze QSTR model performance and visualize toxicity predictions with comprehensive plotting tools.
+              Analyze QSAR model performance and visualize structure-activity relationships.
             </p>
           </div>
         </div>
@@ -469,12 +393,12 @@ const QSTR: React.FC = () => {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">0.92</div>
-                <div className="text-sm text-gray-600">Accuracy</div>
+                <div className="text-2xl font-bold text-blue-600">0.91</div>
+                <div className="text-sm text-gray-600">R² Score</div>
               </div>
               <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-2xl font-bold text-green-600">0.89</div>
-                <div className="text-sm text-gray-600">AUC</div>
+                <div className="text-2xl font-bold text-green-600">0.28</div>
+                <div className="text-sm text-gray-600">RMSE</div>
               </div>
             </div>
             <div className="text-center py-8 text-gray-500">
@@ -485,11 +409,11 @@ const QSTR: React.FC = () => {
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Toxicity Distribution</h4>
+          <h4 className="font-semibold text-gray-900 mb-4">Feature Importance</h4>
           <div className="space-y-4">
             <div className="text-center py-8 text-gray-500">
               <BarChart3 className="w-12 h-12 mx-auto mb-2 text-gray-400" />
-              <p>Toxicity distribution chart will appear here</p>
+              <p>Feature importance chart will appear here</p>
             </div>
           </div>
         </div>
@@ -505,7 +429,7 @@ const QSTR: React.FC = () => {
           <div>
             <h3 className="font-medium text-blue-900 mb-2">Molecular Visualization</h3>
             <p className="text-sm text-blue-800">
-              Visualize molecular structures and their toxicity predictions using the molecular visualizer.
+              Visualize molecular structures and their activities using the molecular visualizer.
             </p>
           </div>
         </div>
@@ -536,7 +460,8 @@ const QSTR: React.FC = () => {
                   <option>2D Structure</option>
                   <option>3D Structure</option>
                   <option>Conformer Comparison</option>
-                  <option>Toxicity Hotspots</option>
+                  <option>Activity Hotspots</option>
+                  <option>Binding Site</option>
                 </select>
               </div>
               <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
@@ -557,74 +482,15 @@ const QSTR: React.FC = () => {
     </div>
   )
 
-  const renderUncertainty = () => (
-    <div className="space-y-6">
-      <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
-        <div className="flex items-start space-x-3">
-          <TrendingUp className="w-6 h-6 text-indigo-600 mt-0.5" />
-          <div>
-            <h3 className="font-medium text-indigo-900 mb-2">Uncertainty Quantification</h3>
-            <p className="text-sm text-indigo-800">
-              Quantify prediction uncertainty and confidence intervals for toxicity predictions.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Uncertainty Methods</h4>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Method
-              </label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>Conformal Prediction</option>
-                <option>Bootstrap Uncertainty</option>
-                <option>Ensemble Uncertainty</option>
-                <option>Monte Carlo Dropout</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Confidence Level
-              </label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>90%</option>
-                <option>95%</option>
-                <option>99%</option>
-              </select>
-            </div>
-            <button className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors">
-              Calculate Uncertainty
-            </button>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Uncertainty Results</h4>
-          <div className="space-y-4">
-            <div className="text-center py-8 text-gray-500">
-              <TrendingUp className="w-12 h-12 mx-auto mb-2 text-gray-400" />
-              <p>No uncertainty results</p>
-              <p className="text-sm">Calculate uncertainty to see results here</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-
   const renderAdvanced = () => (
     <div className="space-y-6">
       <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
         <div className="flex items-start space-x-3">
           <Zap className="w-6 h-6 text-purple-600 mt-0.5" />
           <div>
-            <h3 className="font-medium text-purple-900 mb-2">Advanced QSTR Modeling</h3>
+            <h3 className="font-medium text-purple-900 mb-2">Advanced QSAR Modeling</h3>
             <p className="text-sm text-purple-800">
-              Advanced QSTR modeling with hyperparameter tuning, ensemble methods, and toxicity-specific features.
+              Advanced QSAR modeling with hyperparameter tuning, ensemble methods, and activity-specific features.
             </p>
           </div>
         </div>
@@ -642,6 +508,7 @@ const QSTR: React.FC = () => {
                 <option>Grid Search</option>
                 <option>Random Search</option>
                 <option>Bayesian Optimization</option>
+                <option>Genetic Algorithm</option>
               </select>
             </div>
             <div>
@@ -676,6 +543,10 @@ const QSTR: React.FC = () => {
                 <input type="checkbox" className="mr-2" />
                 <span className="text-sm">Bagging</span>
               </label>
+              <label className="flex items-center">
+                <input type="checkbox" className="mr-2" />
+                <span className="text-sm">Boosting</span>
+              </label>
             </div>
             <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
               Configure Ensemble
@@ -694,14 +565,14 @@ const QSTR: React.FC = () => {
         return renderTraining()
       case 'descriptors':
         return renderDescriptors()
-      case 'toxicity_alerts':
-        return renderToxicityAlerts()
+      case 'structure_activity':
+        return renderStructureActivity()
+      case 'pharmacophore':
+        return renderPharmacophore()
       case 'analysis':
         return renderAnalysis()
       case 'visualization':
         return renderVisualization()
-      case 'uncertainty':
-        return renderUncertainty()
       case 'advanced':
         return renderAdvanced()
       default:
@@ -713,9 +584,9 @@ const QSTR: React.FC = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="bg-white rounded-lg shadow-sm p-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">QSTR Modeling</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">QSAR Modeling</h1>
         <p className="text-lg text-gray-600">
-          Quantitative Structure-Toxicity Relationships for toxicity prediction
+          Quantitative Structure-Activity Relationships for drug discovery and chemical biology
         </p>
       </div>
 
@@ -731,7 +602,7 @@ const QSTR: React.FC = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${
                     activeTab === tab.id
-                      ? 'border-red-500 text-red-600'
+                      ? 'border-green-500 text-green-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
@@ -753,4 +624,4 @@ const QSTR: React.FC = () => {
   )
 }
 
-export default QSTR 
+export default QSAR 

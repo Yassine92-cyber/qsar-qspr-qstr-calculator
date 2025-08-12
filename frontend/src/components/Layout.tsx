@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Database, Brain, BarChart3, Home, FlaskConical, Shield, TrendingUp, FileText } from 'lucide-react'
+import { Database, Brain, BarChart3, Home, FlaskConical, Shield, TrendingUp, FileText, Activity } from 'lucide-react'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -11,6 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: Home },
+    { name: 'QSAR', href: '/qsar', icon: Activity },
     { name: 'QSPR', href: '/qspr', icon: TrendingUp },
     { name: 'QSTR', href: '/qstr', icon: Shield },
     { name: 'Descriptors', href: '/descriptors', icon: Database },
@@ -25,12 +26,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Navigation */}
       <nav className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
+          <div className="flex justify-center h-16">
             <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-xl font-bold text-gray-900">QSAR Calculator</h1>
-              </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <div className="hidden sm:flex sm:space-x-8">
                 {navigation.map((item) => {
                   const Icon = item.icon
                   const isActive = location.pathname === item.href
