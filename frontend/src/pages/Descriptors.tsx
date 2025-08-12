@@ -8,8 +8,7 @@ const Descriptors: React.FC = () => {
 
   const tabs = [
     { id: 'overview', name: 'Overview', icon: Database, description: 'Molecular descriptors overview' },
-    { id: '2d_descriptors', name: '2D Descriptors', icon: Calculator, description: 'Calculate 2D molecular descriptors' },
-    { id: '3d_descriptors', name: '3D Descriptors', icon: Layers, description: 'Calculate 3D molecular descriptors' },
+    { id: '2d_3d_descriptors', name: '2D & 3D Descriptors', icon: Calculator, description: 'Calculate 2D and 3D molecular descriptors' },
     { id: 'fingerprints', name: 'Fingerprints', icon: Target, description: 'Molecular fingerprints and keys' },
     { id: 'fragment_descriptors', name: 'Fragment Descriptors', icon: Atom, description: 'Fragment-based descriptors' },
     { id: 'estate_descriptors', name: 'E-State Descriptors', icon: TrendingUp, description: 'E-state and VSA descriptors' },
@@ -96,19 +95,10 @@ const Descriptors: React.FC = () => {
             <div className="p-4 border border-gray-200 rounded-lg">
               <div className="flex items-center space-x-3 mb-2">
                 <Calculator className="w-5 h-5 text-blue-600" />
-                <h5 className="font-medium text-gray-900">2D Descriptors</h5>
+                <h5 className="font-medium text-gray-900">2D & 3D Descriptors</h5>
               </div>
-              <p className="text-sm text-gray-600">Topological and constitutional descriptors</p>
-              <div className="text-xs text-gray-500 mt-1">12 descriptors available</div>
-            </div>
-
-            <div className="p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3 mb-2">
-                <Layers className="w-5 h-5 text-green-600" />
-                <h5 className="font-medium text-gray-900">3D Descriptors</h5>
-              </div>
-              <p className="text-sm text-gray-600">3D geometric and shape descriptors</p>
-              <div className="text-xs text-gray-500 mt-1">10 descriptors available</div>
+              <p className="text-sm text-gray-600">Topological, constitutional, and 3D geometric descriptors</p>
+              <div className="text-xs text-gray-500 mt-1">22 descriptors available</div>
             </div>
 
             <div className="p-4 border border-gray-200 rounded-lg">
@@ -156,8 +146,7 @@ const Descriptors: React.FC = () => {
                 onChange={(e) => setSelectedDescriptorType(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="2d">2D Descriptors</option>
-                <option value="3d">3D Descriptors</option>
+                <option value="2d_3d">2D & 3D Descriptors</option>
                 <option value="fingerprints">Fingerprints</option>
                 <option value="fragment">Fragment Descriptors</option>
                 <option value="all">All Descriptors</option>
@@ -173,24 +162,28 @@ const Descriptors: React.FC = () => {
     </div>
   )
 
-  const render2DDescriptors = () => (
+  const render2D3DDescriptors = () => (
     <div className="space-y-6">
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
         <div className="flex items-start space-x-3">
-          <Calculator className="w-6 h-6 text-green-600 mt-0.5" />
+          <Calculator className="w-6 h-6 text-blue-600 mt-0.5" />
           <div>
-            <h3 className="font-medium text-green-900 mb-2">2D Molecular Descriptors</h3>
-            <p className="text-sm text-green-800">
-              Calculate topological and constitutional molecular descriptors based on 2D molecular structure.
+            <h3 className="font-medium text-blue-900 mb-2">2D & 3D Molecular Descriptors</h3>
+            <p className="text-sm text-blue-800">
+              Calculate both 2D topological and 3D geometric molecular descriptors for comprehensive molecular analysis.
             </p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* 2D Descriptors Section */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Available 2D Descriptors</h4>
-          <div className="space-y-3">
+          <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+            <Calculator className="w-5 h-5 text-green-600 mr-2" />
+            2D Descriptors
+          </h4>
+          <div className="space-y-3 mb-4">
             {descriptorCategories['2d'].map((descriptor) => (
               <div key={descriptor.value} className="p-3 border border-gray-200 rounded-lg">
                 <div className="flex justify-between items-start">
@@ -207,64 +200,13 @@ const Descriptors: React.FC = () => {
           </div>
         </div>
 
+        {/* 3D Descriptors Section */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">2D Descriptor Calculation</h4>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                SMILES Input
-              </label>
-              <textarea
-                value={smiles}
-                onChange={(e) => setSmiles(e.target.value)}
-                placeholder="Enter SMILES string"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                rows={3}
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <label className="flex items-center">
-                <input type="checkbox" className="mr-2" defaultChecked />
-                <span className="text-sm">Include all 2D descriptors</span>
-              </label>
-              <label className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                <span className="text-sm">Calculate drug-likeness (QED)</span>
-              </label>
-              <label className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                <span className="text-sm">Include Lipinski rule violations</span>
-              </label>
-            </div>
-
-            <button className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">
-              Calculate 2D Descriptors
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-
-  const render3DDescriptors = () => (
-    <div className="space-y-6">
-      <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
-        <div className="flex items-start space-x-3">
-          <Layers className="w-6 h-6 text-purple-600 mt-0.5" />
-          <div>
-            <h3 className="font-medium text-purple-900 mb-2">3D Molecular Descriptors</h3>
-            <p className="text-sm text-purple-800">
-              Calculate 3D geometric and shape descriptors based on molecular conformations.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Available 3D Descriptors</h4>
-          <div className="space-y-3">
+          <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+            <Layers className="w-5 h-5 text-purple-600 mr-2" />
+            3D Descriptors
+          </h4>
+          <div className="space-y-3 mb-4">
             {descriptorCategories['3d'].map((descriptor) => (
               <div key={descriptor.value} className="p-3 border border-gray-200 rounded-lg">
                 <div className="flex justify-between items-start">
@@ -280,51 +222,64 @@ const Descriptors: React.FC = () => {
             ))}
           </div>
         </div>
+      </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">3D Descriptor Configuration</h4>
+      {/* Combined Calculation Section */}
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h4 className="font-semibold text-gray-900 mb-4">Descriptor Calculation</h4>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              SMILES Input
+            </label>
+            <textarea
+              value={smiles}
+              onChange={(e) => setSmiles(e.target.value)}
+              placeholder="Enter SMILES string"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows={3}
+            />
+          </div>
+          
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                SMILES Input
+                Descriptor Types
               </label>
-              <textarea
-                value={smiles}
-                onChange={(e) => setSmiles(e.target.value)}
-                placeholder="Enter SMILES string"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                rows={3}
-              />
+              <div className="space-y-2">
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" defaultChecked />
+                  <span className="text-sm">2D Descriptors</span>
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" defaultChecked />
+                  <span className="text-sm">3D Descriptors</span>
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  <span className="text-sm">Include drug-likeness (QED)</span>
+                </label>
+              </div>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Conformer Generation
+                3D Conformer Generation
               </label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option>ETKDG (Default)</option>
                 <option>MMFF94s</option>
                 <option>UFF</option>
                 <option>Custom</option>
               </select>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Number of Conformers
-              </label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
-                <option>1 (Lowest energy)</option>
-                <option>5</option>
-                <option>10</option>
-                <option>20</option>
-              </select>
-            </div>
-
-            <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
-              Calculate 3D Descriptors
-            </button>
           </div>
+        </div>
+        
+        <div className="mt-6">
+          <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+            Calculate 2D & 3D Descriptors
+          </button>
         </div>
       </div>
     </div>
@@ -769,10 +724,8 @@ const Descriptors: React.FC = () => {
     switch (activeTab) {
       case 'overview':
         return renderOverview()
-      case '2d_descriptors':
-        return render2DDescriptors()
-      case '3d_descriptors':
-        return render3DDescriptors()
+      case '2d_3d_descriptors':
+        return render2D3DDescriptors()
       case 'fingerprints':
         return renderFingerprints()
       case 'fragment_descriptors':
